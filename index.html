@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockAI Pro - Advanced Stock Analysis Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <h1>StockAI Pro</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn--outline" id="settingsBtn">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </button>
+                    <div class="user-info">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Trader Pro</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="navigation">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </button>
+                <button class="nav-tab" data-tab="companies">
+                    <i class="fas fa-building"></i>
+                    Companies
+                </button>
+                <button class="nav-tab" data-tab="predictor">
+                    <i class="fas fa-brain"></i>
+                    Smart Predictor
+                </button>
+                <button class="nav-tab" data-tab="news">
+                    <i class="fas fa-newspaper"></i>
+                    News
+                </button>
+                <button class="nav-tab" data-tab="technical">
+                    <i class="fas fa-chart-bar"></i>
+                    Technical
+                </button>
+                <button class="nav-tab" data-tab="predictions">
+                    <i class="fas fa-crystal-ball"></i>
+                    Predictions
+                </button>
+                <button class="nav-tab" data-tab="portfolio">
+                    <i class="fas fa-briefcase"></i>
+                    Portfolio
+                </button>
+                <button class="nav-tab" data-tab="analysis">
+                    <i class="fas fa-search"></i>
+                    Analysis
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <div class="tab-content active" id="dashboard">
+                <div class="dashboard-grid">
+                    <div class="market-overview card">
+                        <div class="card__header">
+                            <h3>Market Overview</h3>
+                            <span class="status status--success">Live</span>
+                        </div>
+                        <div class="card__body">
+                            <div class="market-stats">
+                                <div class="stat-item">
+                                    <div class="stat-label">S&P 500</div>
+                                    <div class="stat-value positive">4,785.32</div>
+                                    <div class="stat-change">+0.87%</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">NASDAQ</div>
+                                    <div class="stat-value positive">15,234.56</div>
+                                    <div class="stat-change">+1.23%</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">DOW</div>
+                                    <div class="stat-value negative">35,123.89</div>
+                                    <div class="stat-change">-0.45%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trending-stocks card">
+                        <div class="card__header">
+                            <h3>Top Movers</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="trending-list" id="trendingStocks">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ai-insights card">
+                        <div class="card__header">
+                            <h3>AI Market Insights</h3>
+                            <span class="status status--info">Updated</span>
+                        </div>
+                        <div class="card__body">
+                            <div class="insight-item">
+                                <i class="fas fa-bullseye"></i>
+                                <div>
+                                    <strong>Market Sentiment:</strong> Bullish momentum detected in tech sector
+                                </div>
+                            </div>
+                            <div class="insight-item">
+                                <i class="fas fa-warning"></i>
+                                <div>
+                                    <strong>Risk Alert:</strong> Increased volatility expected in energy stocks
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-summary card">
+                        <div class="card__header">
+                            <h3>Portfolio Performance</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="portfolio-chart">
+                                <canvas id="portfolioChart" style="position: relative;" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Companies Tab -->
+            <div class="tab-content" id="companies">
+                <div class="companies-header">
+                    <h2>Company Selection Hub</h2>
+                    <div class="search-container">
+                        <input type="text" class="form-control" id="companySearch" placeholder="Search companies...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="companies-grid" id="companiesGrid">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+
+            <!-- Enhanced Predictor Tab -->
+            <div class="tab-content" id="predictor">
+                <div class="predictor-header">
+                    <h2>Enhanced ML Stock Predictor</h2>
+                    <div class="predictor-status">
+                        <span class="status status--success">5 Models Active</span>
+                    </div>
+                </div>
+                
+                <div class="prediction-controls card">
+                    <div class="card__header">
+                        <h3>Prediction Settings</h3>
+                    </div>
+                    <div class="card__body">
+                        <div class="controls-grid">
+                            <div class="control-group">
+                                <label class="form-label">Select Company</label>
+                                <select class="form-control" id="predictorCompanySelect">
+                                    <option value="">Choose a company...</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label class="form-label">Select Date</label>
+                                <input type="date" class="form-control" id="predictionDatePicker">
+                            </div>
+                            <div class="control-group">
+                                <button class="btn btn--primary" id="generatePredictionBtn">
+                                    <i class="fas fa-magic"></i>
+                                    Generate Prediction
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prediction-results" id="predictionResults" style="display: none;">
+                    <div class="results-grid">
+                        <!-- Current/Historical Price Display -->
+                        <div class="price-display card" id="priceDisplayCard">
+                            <div class="card__header">
+                                <h3 id="priceDisplayTitle">Current Price</h3>
+                                <span class="status status--info" id="priceDisplayStatus">Live</span>
+                            </div>
+                            <div class="card__body">
+                                <div class="price-info">
+                                    <div class="main-price" id="displayedPrice">$0.00</div>
+                                    <div class="price-change" id="displayedChange">+$0.00 (0.00%)</div>
+                                    <div class="price-date" id="displayedDate">Today</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ML Model Rankings (for past dates) -->
+                        <div class="model-rankings card" id="modelRankingsCard" style="display: none;">
+                            <div class="card__header">
+                                <h3>Model Accuracy Rankings</h3>
+                                <span class="status status--warning">Historical</span>
+                            </div>
+                            <div class="card__body">
+                                <div id="historicalModelRankings">
+                                    <!-- Dynamic content -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Future Predictions -->
+                        <div class="future-predictions card" id="futurePredictionsCard" style="display: none;">
+                            <div class="card__header">
+                                <h3>ML Model Predictions</h3>
+                                <span class="status status--success">Future Analysis</span>
+                            </div>
+                            <div class="card__body">
+                                <div id="futureModelPredictions">
+                                    <!-- Dynamic content -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Consensus & Risk Analysis -->
+                        <div class="consensus-analysis card" id="consensusCard" style="display: none;">
+                            <div class="card__header">
+                                <h3>Consensus & Risk Analysis</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="consensus-content">
+                                    <div class="consensus-price">
+                                        <div class="consensus-label">Consensus Prediction</div>
+                                        <div class="consensus-value" id="consensusPrice">$0.00</div>
+                                        <div class="consensus-range" id="consensusRange">Range: $0.00 - $0.00</div>
+                                    </div>
+                                    <div class="risk-factors">
+                                        <h4>Key Risk Factors</h4>
+                                        <div id="riskFactorsList">
+                                            <!-- Dynamic content -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prediction Chart -->
+                    <div class="prediction-chart card">
+                        <div class="card__header">
+                            <h3>Model Comparison Chart</h3>
+                        </div>
+                        <div class="card__body">
+                            <canvas id="enhancedPredictionChart" style="position: relative;" width="800" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News Tab -->
+            <div class="tab-content" id="news">
+                <div class="news-header">
+                    <h2>Financial News & Sentiment Analysis</h2>
+                    <div class="news-filters">
+                        <button class="btn btn--outline active" data-filter="all">All</button>
+                        <button class="btn btn--outline" data-filter="technology">Technology</button>
+                        <button class="btn btn--outline" data-filter="finance">Finance</button>
+                        <button class="btn btn--outline" data-filter="market">Market</button>
+                    </div>
+                </div>
+                <div class="news-grid" id="newsGrid">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+
+            <!-- Technical Tab -->
+            <div class="tab-content" id="technical">
+                <div class="technical-header">
+                    <h2>Technical Analysis</h2>
+                    <div class="stock-selector">
+                        <select class="form-control" id="technicalStockSelect">
+                            <option value="AAPL">Apple Inc. (AAPL)</option>
+                            <option value="MSFT">Microsoft Corp. (MSFT)</option>
+                            <option value="GOOGL">Alphabet Inc. (GOOGL)</option>
+                            <option value="TSLA">Tesla Inc. (TSLA)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="technical-content">
+                    <div class="technical-chart card">
+                        <div class="card__header">
+                            <h3>Price Chart & Indicators</h3>
+                        </div>
+                        <div class="card__body">
+                            <canvas id="technicalChart" style="position: relative;" width="800" height="400"></canvas>
+                        </div>
+                    </div>
+                    <div class="technical-indicators">
+                        <div class="indicator-card card">
+                            <div class="card__body">
+                                <h4>RSI (14)</h4>
+                                <div class="indicator-value">68.5</div>
+                                <span class="status status--warning">Overbought Warning</span>
+                            </div>
+                        </div>
+                        <div class="indicator-card card">
+                            <div class="card__body">
+                                <h4>MACD</h4>
+                                <div class="indicator-value">+2.45</div>
+                                <span class="status status--success">Bullish Signal</span>
+                            </div>
+                        </div>
+                        <div class="indicator-card card">
+                            <div class="card__body">
+                                <h4>Moving Average</h4>
+                                <div class="indicator-value">$175.89</div>
+                                <span class="status status--success">Above MA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predictions Tab -->
+            <div class="tab-content" id="predictions">
+                <div class="predictions-header">
+                    <h2>AI Predictions Dashboard</h2>
+                </div>
+                <div class="predictions-grid">
+                    <div class="prediction-summary card">
+                        <div class="card__header">
+                            <h3>Model Performance Rankings</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="model-rankings" id="modelRankings">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ensemble-prediction card">
+                        <div class="card__header">
+                            <h3>Ensemble Prediction</h3>
+                            <span class="status status--success">High Confidence</span>
+                        </div>
+                        <div class="card__body">
+                            <div class="ensemble-result">
+                                <div class="prediction-value">$182.45</div>
+                                <div class="prediction-change">+4.02% (7 days)</div>
+                                <div class="confidence-meter">
+                                    <div class="confidence-bar" style="width: 85%"></div>
+                                    <span>85% Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Tab -->
+            <div class="tab-content" id="portfolio">
+                <div class="portfolio-header">
+                    <h2>Portfolio Management</h2>
+                    <button class="btn btn--primary" id="addHoldingBtn">
+                        <i class="fas fa-plus"></i>
+                        Add Holding
+                    </button>
+                </div>
+                <div class="portfolio-content">
+                    <div class="portfolio-stats">
+                        <div class="stat-card card">
+                            <div class="card__body">
+                                <h4>Total Value</h4>
+                                <div class="stat-value">$125,750.00</div>
+                                <div class="stat-change positive">+$2,850.00 (2.32%)</div>
+                            </div>
+                        </div>
+                        <div class="stat-card card">
+                            <div class="card__body">
+                                <h4>Day's Change</h4>
+                                <div class="stat-value positive">+$1,245.00</div>
+                                <div class="stat-change positive">+1.0%</div>
+                            </div>
+                        </div>
+                        <div class="stat-card card">
+                            <div class="card__body">
+                                <h4>Total Return</h4>
+                                <div class="stat-value positive">+$25,750.00</div>
+                                <div class="stat-change positive">+25.75%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="holdings-table card">
+                        <div class="card__header">
+                            <h3>Holdings</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="table-container" id="holdingsTable">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analysis Tab -->
+            <div class="tab-content" id="analysis">
+                <div class="analysis-header">
+                    <h2>Deep Market Analysis</h2>
+                </div>
+                <div class="analysis-content">
+                    <div class="analysis-tools">
+                        <div class="tool-card card">
+                            <div class="card__header">
+                                <h3>Correlation Analysis</h3>
+                            </div>
+                            <div class="card__body">
+                                <canvas id="correlationChart" style="position: relative;" width="400" height="300"></canvas>
+                            </div>
+                        </div>
+                        <div class="tool-card card">
+                            <div class="card__header">
+                                <h3>Volatility Analysis</h3>
+                            </div>
+                            <div class="card__body">
+                                <canvas id="volatilityChart" style="position: relative;" width="400" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Settings Modal -->
+        <div class="modal hidden" id="settingsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Settings</h3>
+                    <button class="modal-close" id="closeSettings">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="settings-section">
+                        <h4>Display Preferences</h4>
+                        <div class="form-group">
+                            <label class="form-label">Theme</label>
+                            <select class="form-control" id="themeSelect">
+                                <option value="auto">Auto (System)</option>
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Currency</label>
+                            <select class="form-control" id="currencySelect">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h4>Notifications</h4>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="priceAlerts" checked>
+                            Price Alerts
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsAlerts" checked>
+                            News Alerts
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Details Modal -->
+        <div class="modal hidden" id="companyModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="companyModalTitle">Company Details</h3>
+                    <button class="modal-close" id="closeCompanyModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body" id="companyModalBody">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced AI Chatbot -->
+        <div class="chatbot-container">
+            <!-- Chat Button -->
+            <button class="chat-button" id="chatButton">
+                <i class="fas fa-comments"></i>
+                <div class="chat-status-indicator" id="chatStatus"></div>
+            </button>
+
+            <!-- Enhanced Chat Interface -->
+            <div class="chat-interface hidden" id="chatInterface">
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <i class="fas fa-brain"></i>
+                        <div>
+                            <span>AI Stock Expert Pro</span>
+                            <div class="chat-subtitle">Powered by Advanced AI</div>
+                        </div>
+                    </div>
+                    <div class="chat-controls">
+                        <button class="chat-minimize" id="chatMinimize">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button class="chat-close" id="chatClose">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>Hello! I'm your comprehensive AI Stock Expert with access to real-time market data. I can help you with:</p>
+                            <ul>
+                                <li>🔍 In-depth stock analysis and valuations</li>
+                                <li>📈 Technical analysis and chart patterns</li>
+                                <li>💡 Investment strategies and portfolio optimization</li>
+                                <li>📰 Market news interpretation and impact analysis</li>
+                                <li>⚠️ Risk assessment and management advice</li>
+                                <li>🎯 Trading recommendations and timing</li>
+                            </ul>
+                            <p>Ask me anything about the stock market, specific companies, or investment strategies!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <div class="typing-indicator hidden" id="typingIndicator">
+                        <span>AI is analyzing market data</span>
+                        <div class="typing-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="quick-questions">
+                        <button class="quick-question-btn" data-question="What's the market outlook for tech stocks?">Tech Outlook</button>
+                        <button class="quick-question-btn" data-question="Analyze Apple's current valuation">AAPL Analysis</button>
+                        <button class="quick-question-btn" data-question="Best dividend stocks for 2024?">Dividend Picks</button>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Ask about any stock, market trend, or investment strategy...">
+                        <button id="chatSend">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
