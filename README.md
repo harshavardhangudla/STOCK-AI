@@ -6,7 +6,7 @@ A comprehensive, professional-grade stock analysis web application featuring sop
 
 ## 🚀 Live Demo
 
-**Access the application**: https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/ff990a0ebed829dd32380e03b4e03314/9f97f746-befd-4dc2-840a-145ab7b4be7f/index.html
+**Access the application**: stock-ai-nu-nine.vercel.app
 
 ## ✨ Key Features
 
