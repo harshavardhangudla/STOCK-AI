@@ -6,7 +6,7 @@ A comprehensive, professional-grade stock analysis web application featuring sop
 
 ## 🚀 Live Demo
 
-**Access the application**: stock-ai-nu-nine.vercel.app
+**Access the application**: [stock-ai-nu-nine.vercel.app](https://stock-ai-nu-nine.vercel.app/)
 
 ## ✨ Key Features
 
